@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.name {
+    color: rgb(37, 37, 37);
+}
+
+.height {
+    color: rgb(75, 185, 103);
+}
+
+.big {
+    color: gold;
+}

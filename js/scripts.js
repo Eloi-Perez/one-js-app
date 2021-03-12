@@ -4,7 +4,7 @@ let pokemonList = [
 {name: 'Venusaur', height: 2, type: ['Grass', 'Poison']},
 {name: 'Charmander', height: 0.6, type: ['Fire']},
 {name: 'Charmeleon', height: 1.1, type: ['Fire']},
-{name: 'Charizard', height: 1.7, type: ['Grass', 'Flying']},
+{name: 'Charizard', height: 1.7, type: ['Fire', 'Flying']},
 {name: 'Squirtle', height: 0.5, type: ['Water']},
 {name: 'Wartortle', height: 1, type: ['Water']},
 {name: 'Blastoise', height: 1.6, type: ['Water']}

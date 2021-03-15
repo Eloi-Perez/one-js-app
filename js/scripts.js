@@ -25,7 +25,7 @@ let pokemonRepository = (function () {
     }
 
     function find(pokemon) {
-        return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase())
+        return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase());
     }
 
     return {
@@ -36,7 +36,7 @@ let pokemonRepository = (function () {
 
 })();
 
-let testAdd = {name: 'Pikachu', height: 0.4, type: ['Electric']}
+let testAdd = {name: 'Pikachu', height: 0.4, type: ['Electric']};
 pokemonRepository.add(testAdd);
 
 pokemonRepository.getAll().forEach(element => {

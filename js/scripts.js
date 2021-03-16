@@ -28,10 +28,30 @@ let pokemonRepository = (function () {
         return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase());
     }
 
+    function addListItem(pokemon){
+        let htmlList = document.querySelector('.pokemon-list');
+        let listItem = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('pokemonButton');
+        button.addEventListener('click', () => {
+            showDetails(pokemon);
+            button.classList.toggle('pokemonButtonMark');      
+        });
+        listItem.appendChild(button);
+        htmlList.appendChild(listItem);
+    }
+
+    function showDetails(pokemon) {
+        console.log(pokemon.name +' '+ pokemon.height +'m '+ pokemon.type);
+    }
+
     return {
         add: add,
         find: find,
-        getAll: getAll
+        getAll: getAll,
+        addListItem: addListItem,
+        showDetails: showDetails
     };
 
 })();
@@ -39,10 +59,13 @@ let pokemonRepository = (function () {
 let testAdd = {name: 'Pikachu', height: 0.4, type: ['Electric']};
 pokemonRepository.add(testAdd);
 
-pokemonRepository.getAll().forEach(element => {
-    let big = ''
-    if (element.height > 1.1) {big = ' Wow, that’s big!'} else { big = ''}
-    document.write(`<p><span class="name">${element.name}</span> <span class="height">height: ${element.height}m</span> <span class="type">${element.type}</span><span class="big"> ${big}</span></p>`);
+pokemonRepository.getAll().map(element => {
+    pokemonRepository.addListItem(element);
+
+
+    // let big = ''
+    // if (element.height > 1.1) {big = ' Wow, that’s big!'} else { big = ''}
+    // document.write(`<p><span class="name">${element.name}</span> <span class="height">height: ${element.height}m</span> <span class="type">${element.type}</span><span class="big"> ${big}</span></p>`);
 });
 
 

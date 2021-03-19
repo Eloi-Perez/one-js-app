@@ -1,5 +1,17 @@
 let pokemonRepository = ( () => {
 
+    let divLoading = document.querySelector('#loading');
+    let loading = document.createElement('p');
+    loading.innerText = 'Loading...';
+
+    function showLoadingMessage() {
+        divLoading.appendChild(loading);
+    }
+
+    function hideLoadingMessage() {
+        divLoading.removeChild(loading);
+    }
+
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -16,6 +28,7 @@ let pokemonRepository = ( () => {
     }
 
     function loadList() {
+        showLoadingMessage();
         return fetch(apiUrl).then(response => {
             return response.json();
         }).then(json => {
@@ -26,12 +39,15 @@ let pokemonRepository = ( () => {
                 };
                 add(pokemon);
             });
+            hideLoadingMessage();
         }).catch(e => {
             console.error(e);
+            hideLoadingMessage();
         })
     }
 
     function loadDetails(item) {
+        showLoadingMessage();
         let url = item.detailsUrl;
         return fetch(url).then(response => {
             return response.json();
@@ -39,8 +55,10 @@ let pokemonRepository = ( () => {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = details.types;
+            hideLoadingMessage();
         }).catch(e => {
             console.error(e);
+            hideLoadingMessage();
         });
     }
 
@@ -80,6 +98,7 @@ let pokemonRepository = ( () => {
 
 })();
 
+
 pokemonRepository.loadList().then( () => {
     pokemonRepository.getAll().map(element => {
         pokemonRepository.addListItem(element);
@@ -95,5 +114,5 @@ console.log(pokemonRepository.find('charizarD')); //now is happening before load
 
 
 
-let testAdd = {namse: 'Pikachu', height: 0.4, type: ['Electric']};
-pokemonRepository.add(testAdd);
+// let testAdd = {namse: 'Pikachu', height: 0.4, type: ['Electric']};
+// pokemonRepository.add(testAdd);

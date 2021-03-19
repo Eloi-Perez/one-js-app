@@ -23,6 +23,13 @@ h3 {
     text-align: center;
 }
 
+#loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 4px;
+}
+
 .pokemon-list {
     list-style-type: none;
     padding: 0;

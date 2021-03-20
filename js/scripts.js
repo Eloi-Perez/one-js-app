@@ -1,7 +1,7 @@
 const capitalize = (s) => {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase() + s.slice(1)
-}
+};
 
 let pokemonRepository = (() => {
 
@@ -59,10 +59,10 @@ let pokemonRepository = (() => {
         let url = item.detailsUrl;
         return fetch(url).then(response => {
             return response.json();
-        }).then(details => {
-            item.imageUrl = details.sprites.front_default;
-            item.height = details.height;
-            item.types = details.types;
+        }).then(p => {
+            item.imageUrl = p.sprites.front_default;
+            item.height = p.height;
+            item.types = p.types;
             hideLoadingMessage();
         }).catch(e => {
             console.error(e);
@@ -87,7 +87,7 @@ let pokemonRepository = (() => {
 
     // Modal for Details
     let modalContainer = document.querySelector('#modal-container');
-    function showModal(title, text) {
+    function showModal(title, img, ...text) {
 
         // Clear all existing modal content
         modalContainer.innerHTML = '';
@@ -104,14 +104,25 @@ let pokemonRepository = (() => {
         let titleElement = document.createElement('h1');
         titleElement.innerText = title;
 
-        let contentElement = document.createElement('p');
-        contentElement.innerText = text;
+        let imgElement = document.createElement('img')
+        imgElement.setAttribute('src', img);
+        imgElement.setAttribute('width', '96px');
+        imgElement.setAttribute('height', '96px');
+        imgElement.classList.add('modal-img');
 
-        ////////////// ADD IMAGE and url in argument
+        let contentElement = document.createElement('ul');
+        contentElement.classList.add('modal-img');
+        text.map((el) => {
+            let listContentElement = document.createElement('li');
+            listContentElement.innerText = el;
+            contentElement.appendChild(listContentElement);
+        });
 
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
+        modal.appendChild(imgElement);
         modal.appendChild(contentElement);
+
         modalContainer.appendChild(modal);
         modalContainer.classList.add('is-visible');
     }
@@ -138,11 +149,13 @@ let pokemonRepository = (() => {
     //Call Modal
     function showDetails(pokemon) {
         loadDetails(pokemon).then(() => {
-            let types = [];
+            let height =  'Height: ' + pokemon.height + 'm';
+            let ptypes = [];
             pokemon.types.map(el => {
-                types.push(capitalize(el.type.name));
-            })
-            showModal(capitalize(pokemon.name), 'Height: ' + pokemon.height + 'm' + ' - ' + 'Types: ' + types.join(', '));
+                 ptypes.push(capitalize(el.type.name));
+            });
+            let types = 'Types: ' + ptypes.join(', ');
+            showModal(capitalize(pokemon.name), pokemon.imageUrl, height, types);
         });
     }
 

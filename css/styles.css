@@ -110,4 +110,14 @@ margin-top: 0;
 .modal p {
 margin-bottom: 0;
 }
-  
+
+.modal-list {
+    list-style-type: none;
+    padding: 0;
+    float:left;
+}
+
+.modal-img {
+    padding: 0 10px;
+    float:left;
+}

@@ -18,7 +18,7 @@ let pokemonRepository = (() => {
 
     //API List
     let pokemonList = [];
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
 
     function getAll() {
         return pokemonList;
@@ -111,7 +111,7 @@ let pokemonRepository = (() => {
         imgElement.classList.add('modal-img');
 
         let contentElement = document.createElement('ul');
-        contentElement.classList.add('modal-img');
+        contentElement.classList.add('modal-list');
         text.map((el) => {
             let listContentElement = document.createElement('li');
             listContentElement.innerText = el;

@@ -79,7 +79,7 @@ let pokemonRepository = (() => {
         button.classList.add('pokemonButton');
         button.addEventListener('click', () => {
             showDetails(pokemon);
-            button.classList.toggle('pokemonButtonMark');
+            // button.classList.toggle('pokemonButtonMark');
         });
         listItem.appendChild(button);
         htmlList.appendChild(listItem);
@@ -87,7 +87,7 @@ let pokemonRepository = (() => {
 
     // Modal for Details
     let modalContainer = document.querySelector('#modal-container');
-    function showModal(title, img, ...text) {
+    function showModal(title, img, previous, next, ...text) {
 
         // Clear all existing modal content
         modalContainer.innerHTML = '';
@@ -118,6 +118,28 @@ let pokemonRepository = (() => {
             contentElement.appendChild(listContentElement);
         });
 
+        let prevButt;
+        if (previous !== undefined) {
+            prevButt = document.createElement('button');
+            prevButt.classList.add('previous');
+            prevButt.innerText = 'Previous';
+            prevButt.addEventListener('click', () => {
+                showDetails(previous);
+            });
+            modal.appendChild(prevButt);
+        } 
+        
+        let nextButt;
+        if (next !== undefined) {
+            nextButt = document.createElement('button');
+            nextButt.classList.add('next');
+            nextButt.innerText = 'Next';
+            nextButt.addEventListener('click', () => {
+                showDetails(next);
+            });
+            modal.appendChild(nextButt);
+        } 
+
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
         modal.appendChild(imgElement);
@@ -127,7 +149,7 @@ let pokemonRepository = (() => {
         modalContainer.classList.add('is-visible');
     }
 
-    function hideModal() {
+    function hideModal(test) {
         modalContainer.classList.remove('is-visible');
     }
 
@@ -149,23 +171,26 @@ let pokemonRepository = (() => {
     //Call Modal
     function showDetails(pokemon) {
         loadDetails(pokemon).then(() => {
-            let height =  'Height: ' + pokemon.height + 'm';
+            let previous = pokemonList[pokemonList.indexOf(pokemon) - 1];
+            let next = pokemonList[pokemonList.indexOf(pokemon) + 1];
+            let number = '#' + (pokemonList.indexOf(pokemon) + 1);
+            let height = 'Height: ' + pokemon.height + 'm';
             let ptypes = [];
             pokemon.types.map(el => {
-                 ptypes.push(capitalize(el.type.name));
+                ptypes.push(capitalize(el.type.name));
             });
             let types = 'Types: ' + ptypes.join(', ');
-            showModal(capitalize(pokemon.name), pokemon.imageUrl, height, types);
+            showModal(capitalize(pokemon.name), pokemon.imageUrl, previous, next, number, height, types);
         });
     }
 
-    // function find(pokemon) {
-    //     return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase());
-    // }
+    function find(pokemon) {
+        return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase());
+    }
 
     return {
         add: add,
-        // find: find,
+        find: find,
         getAll: getAll,
         addListItem: addListItem,
         showDetails: showDetails,

@@ -51,9 +51,9 @@ h3 {
     background-color: #ffffff;
     color: #000;
 }
-.pokemonButtonMark {
+/* .pokemonButtonMark {
     background-color: #d4a94a;
-}
+} */
 
 /* Modal */
 
@@ -121,3 +121,7 @@ margin-bottom: 0;
     padding: 0 10px;
     float:left;
 }
+
+/* .hide {
+    display: none;
+} */

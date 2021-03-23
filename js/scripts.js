@@ -127,8 +127,8 @@ let pokemonRepository = (() => {
                 showDetails(previous);
             });
             modal.appendChild(prevButt);
-        } 
-        
+        }
+
         let nextButt;
         if (next !== undefined) {
             nextButt = document.createElement('button');
@@ -138,7 +138,7 @@ let pokemonRepository = (() => {
                 showDetails(next);
             });
             modal.appendChild(nextButt);
-        } 
+        }
 
         modal.appendChild(closeButtonElement);
         modal.appendChild(titleElement);
@@ -147,6 +147,37 @@ let pokemonRepository = (() => {
 
         modalContainer.appendChild(modal);
         modalContainer.classList.add('is-visible');
+
+        //Swipe
+        let initialX;
+        let x;
+        function handleStart(e) {
+            initialX = e.clientX;
+        }
+        function handleMove(e) {
+            x = e.clientX;
+        }
+        function handleEnd() {
+            if (previous !== undefined && x < initialX) {
+                showDetails(previous);
+            }
+            if (next !== undefined && x > initialX) {
+                showDetails(next);
+            }
+        }
+        if (window.PointerEvent) {
+            modal.addEventListener("pointerdown", handleStart, true);
+            modal.addEventListener("pointermove", handleMove, true);
+            modal.addEventListener("pointerup", handleEnd, true);
+            modal.addEventListener("pointercancel", handleEnd, true);
+            // } else {
+            // 	modal.addEventListener("touchstart", handleStart, true);
+            // 	modal.addEventListener("touchcancel", handleMove, true);
+            // 	modal.addEventListener("touchmove", handleEnd, true);
+            // 	modal.addEventListener("touchend", handleEnd, true);
+
+            // 	modal.addEventListener("mousedown", handleStart, true);
+        }
     }
 
     function hideModal(test) {

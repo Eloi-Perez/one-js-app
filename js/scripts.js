@@ -216,7 +216,23 @@ let pokemonRepository = (() => {
     }
 
     function find(pokemon) {
-        return pokemonList.filter(el => el['name'].toLowerCase() === pokemon.toLowerCase());
+        let num = Number(pokemon);
+        if (isNaN(num) === false) {
+            if (num >= 1 && num <= 151) {
+                let reNum = pokemonList[num - 1];
+                showDetails(reNum);
+            } else {
+                return console.warn('This list only contains Pokemons 1-151');
+            }
+        } else {
+            let reIndex = pokemonList.findIndex(e => e.name === pokemon.toLowerCase());
+            if (reIndex !== -1) {
+                let reString = pokemonList[reIndex];
+                showDetails(reString);
+            } else {
+                return console.warn('This Pokemon is not in the list, check spelling please.');
+            }
+        }
     }
 
     return {

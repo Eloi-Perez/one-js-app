@@ -3,6 +3,8 @@ const capitalize = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 };
 
+let errorDiv = document.querySelector('#error');
+
 let pokemonRepository = (() => {
 
     //Loading
@@ -222,6 +224,7 @@ let pokemonRepository = (() => {
                 let reNum = pokemonList[num - 1];
                 showDetails(reNum);
             } else {
+                errorDiv.innerText = 'This list only contains Pokemons 1-151';
                 return console.warn('This list only contains Pokemons 1-151');
             }
         } else {
@@ -230,6 +233,7 @@ let pokemonRepository = (() => {
                 let reString = pokemonList[reIndex];
                 showDetails(reString);
             } else {
+                errorDiv.innerText = 'This Pokemon is not in the list, check spelling please.';
                 return console.warn('This Pokemon is not in the list, check spelling please.');
             }
         }
@@ -259,6 +263,16 @@ pokemonRepository.loadList().then(() => {
     });
 });
 
-// console.log(pokemonRepository.find('charizarD')); //now is happening before loading list
-// let testAdd = {namse: 'Pikachu', height: 0.4, type: ['Electric']};
-// pokemonRepository.add(testAdd);
+//Search Button
+function getSearch() {
+    const val = document.querySelector('#site-search').value;
+    errorDiv.innerText = ''
+    pokemonRepository.find(val);
+  }
+
+document.querySelector('#searchButton').addEventListener('click', getSearch);
+document.querySelector('#site-search').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        getSearch();
+    }
+});

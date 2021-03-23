@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>One JS App</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
+
 <body>
-    <h3>Pokedex</h3>
+    <header>
+        <h3>Pokedex</h3>
+        <div id="searchDiv">
+            <input type="search" id="site-search" name="q" placeholder="Search by name or number" aria-label="Search through the Pokedex">
+            <button class="pokemonButton" id="searchButton">Search</button>
+            <div id="error"></div>
+        </div>
+    </header>
+
     <div id="loading"></div>
     <div id='modal-container'></div>
     <ul class="pokemon-list"></ul>
@@ -17,4 +27,5 @@
     <script src="js/fetch-polyfill.umd.js"></script>
     <script src="js/scripts.js"></script>
 </body>
+
 </html>

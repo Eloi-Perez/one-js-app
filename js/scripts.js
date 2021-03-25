@@ -12,7 +12,7 @@ let pokemonRepository = (() => {
     let loading = document.createElement('p');
     loading.innerText = 'Loading...';
     function showLoadingMessage() {
-        divLoading.appendChild(loading);
+        divLoading.appendChild(loading);  //use hide instead?
     }
     function hideLoadingMessage() {
         divLoading.removeChild(loading);
@@ -30,7 +30,7 @@ let pokemonRepository = (() => {
         if (typeof (pokemon) === 'object' && 'name' in pokemon) {
             pokemonList.push(pokemon);
         } else {
-            console.warn('%cpokemonRepository.add() can only add Objects that contains the properties: name' + '%c, height and type.', 'color:white;', 'color:grey; text-decoration: line-through;');
+            console.error('%cpokemonRepository.add() can only add Objects that contains the properties: name' + '%c, height and type.', 'color:white;', 'color:grey; text-decoration: line-through;');
         }
     }
 
@@ -182,7 +182,7 @@ let pokemonRepository = (() => {
         }
     }
 
-    function hideModal(test) {
+    function hideModal() {
         modalContainer.classList.remove('is-visible');
     }
 
@@ -265,7 +265,7 @@ pokemonRepository.loadList().then(() => {
 
 //Search Button
 function getSearch() {
-    const val = document.querySelector('#site-search').value;
+    let val = document.querySelector('#site-search').value;
     errorDiv.innerText = ''
     pokemonRepository.find(val);
   }

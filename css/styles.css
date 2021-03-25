@@ -85,13 +85,15 @@ input#site-search::placeholder {
 }
 
 .pokemonButton:hover {
-    background-color: #ffffff;
+    background-color: #fff;
     color: #000;
 }
 
-/* .pokemonButtonMark {
+.pokemonButton:active, :focus {
     background-color: #d4a94a;
-} */
+    outline: 0;
+    color: #fff;
+}
 
 /* Modal */
 

@@ -76,9 +76,11 @@ let pokemonRepository = (() => {
     function addListItem(pokemon) {
         let htmlList = document.querySelector('.pokemon-list');
         let listItem = document.createElement('li');
+        listItem.classList.add('col-lg-3', 'col-md-4');
         let button = document.createElement('button');
         button.innerText = capitalize(pokemon.name);
-        button.classList.add('pokemonButton');
+        button.classList.add('pokemonButton', 'p-2');
+        button.setAttribute('type', 'button');
         button.addEventListener('click', () => {
             showDetails(pokemon);
             // button.classList.toggle('pokemonButtonMark');
@@ -90,6 +92,9 @@ let pokemonRepository = (() => {
     // Modal for Details
     let modalContainer = document.querySelector('#modal-container');
     function showModal(title, img, previous, next, ...text) {
+
+        // let modal = new bootstrap.Modal(document.querySelector('#modal-container'), options);
+
 
         // Clear all existing modal content
         modalContainer.innerHTML = '';
@@ -172,13 +177,6 @@ let pokemonRepository = (() => {
             modal.addEventListener("pointermove", handleMove, true);
             modal.addEventListener("pointerup", handleEnd, true);
             modal.addEventListener("pointercancel", handleEnd, true);
-            // } else {
-            // 	modal.addEventListener("touchstart", handleStart, true);
-            // 	modal.addEventListener("touchcancel", handleMove, true);
-            // 	modal.addEventListener("touchmove", handleEnd, true);
-            // 	modal.addEventListener("touchend", handleEnd, true);
-
-            // 	modal.addEventListener("mousedown", handleStart, true);
         }
     }
 

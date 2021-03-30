@@ -1,61 +1,20 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
 }
 
-.name {
-    color: rgb(37, 37, 37);
-}
-
-.height {
-    color: rgb(75, 185, 103);
-}
-
-.big {
-    color: gold;
-}
-
-.type {
-    color: forestgreen;
-}
-
-h3 {
-    text-align: center;
-}
-
-header {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#searchDiv {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3fr 1fr;
+.navbar {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 input#site-search {
     border-color: #68c76b;
     border-style: solid;
-}
-
-input#site-search::placeholder {
-    white-space: pre-wrap;
-}
-
-#searchButton {
-    padding: 25px;
-    margin: 0;
+    font-size: 1rem;
 }
 
 #error {
     font-size: 14px;
     color: red;
-    grid-area: 2 / 1 / 2 / 3;
 }
 
 #loading {
@@ -65,23 +24,14 @@ input#site-search::placeholder {
     margin: 4px;
 }
 
-.pokemon-list {
-    list-style-type: none;
-    padding: 0;
-}
-
 .pokemonButton {
     background-color: #68c76b;
     border: none;
     color: white;
     width: 100%;
-    padding: 15px 0;
-    margin: 0.5px 0 1px 0;  
-    text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
     transition-duration: 0.4s;
+    white-space: nowrap;
 }
 
 .pokemonButton:hover {
@@ -89,76 +39,6 @@ input#site-search::placeholder {
     color: #000;
 }
 
-.pokemonButton:active, :focus {
-    background-color: #d4a94a;
-    outline: 0;
-    color: #fff;
-}
-
-/* Modal */
-
-#modal-container {
-    display: none;
-}
-
-#modal-container.is-visible {
-    position: fixed;
-    padding: 20px;
-    box-sizing: border-box;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* to show it above other content */
-    z-index: 999;
-    /* to allow scrolling if the screen is not high enough*/
-    overflow: auto;
-    /* this is used to center the modal */
-    display: grid;
-    text-align: center;
-}
-
-.modal {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
-    background: #fff;
-    padding: 15px;
-    width: 100%;
-    max-width: 700px;
-    text-align: left;
-}
-
-.modal-close {
-    float: right;
-    -webkit-appearance: none;
-    border: 0;
-    background: none;
-    color: #777;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.modal h1 {
-    margin-top: 0;
-}
-
-.modal p {
-    margin-bottom: 0;
-}
-
-.modal-list {
+ .modal-list {
     list-style-type: none;
-    padding: 0;
-    float: left;
 }
-
-.modal-img {
-    padding: 0 10px;
-    float: left;
-}
-
-/* .hide {
-    display: none;
-} */

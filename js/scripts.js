@@ -66,6 +66,7 @@ let pokemonRepository = (() => {
         }).then(p => {
             item.imageUrl = p.sprites.front_default;
             item.height = p.height;
+            item.weight = p.weight;
             item.types = p.types;
             hideLoadingMessage();
         }).catch(e => {
@@ -100,7 +101,7 @@ let pokemonRepository = (() => {
 
         // Create Modal
         let modal = document.createElement('div');
-        
+
         let titleContainer = document.createElement('div');
         titleContainer.classList.add('modal-header');
 
@@ -213,12 +214,13 @@ let pokemonRepository = (() => {
             let next = pokemonList[pokemonList.indexOf(pokemon) + 1];
             let number = '#' + (pokemonList.indexOf(pokemon) + 1);
             let height = 'Height: ' + pokemon.height + 'm';
+            let weight = 'Weight: ' + pokemon.weight + 'Kg';
             let ptypes = [];
             pokemon.types.map(el => {
                 ptypes.push(capitalize(el.type.name));
             });
             let types = 'Types: ' + ptypes.join(', ');
-            showModal(capitalize(pokemon.name), pokemon.imageUrl, previous, next, number, height, types);
+            showModal(capitalize(pokemon.name), pokemon.imageUrl, previous, next, number, height, weight, types);
         });
     }
 
@@ -266,7 +268,7 @@ pokemonRepository.loadList().then(() => {
 });
 
 // for show Modal without Bootstrap button -> to call it -> myModal.show();
-    let myModal = new bootstrap.Modal(document.querySelector('#mainModal'), {});
+let myModal = new bootstrap.Modal(document.querySelector('#mainModal'), {});
 
 //Search Button
 function getSearch() {
@@ -274,15 +276,7 @@ function getSearch() {
     errorDiv.innerText = '';
     pokemonRepository.find(val);
 }
-document.querySelector('#searchButton').addEventListener('click', function (e) {
+document.querySelector('#searchButton').addEventListener('click', e => {
     e.preventDefault();
     getSearch();
 });
-
-//Not needed
-// document.querySelector('#site-search').addEventListener('keypress', function (e) {
-//     if (e.key === 'Enter') {
-//         e.preventDefault();
-//         getSearch();
-//     }
-// });

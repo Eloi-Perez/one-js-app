@@ -6,6 +6,11 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+h1 sup {
+    color: rgba(104, 199, 107, 0.99);
+    text-shadow: 1px 1px 0.5px rgba(0, 0, 0, 0.5);
+}
+
 input#site-search {
     border-color: #68c76b;
     border-style: solid;

@@ -100,10 +100,11 @@ let pokemonRepository = (() => {
 
         // Create Modal
         let modal = document.createElement('div');
+        
         let titleContainer = document.createElement('div');
         titleContainer.classList.add('modal-header');
 
-        let titleElement = document.createElement('h3');
+        let titleElement = document.createElement('h1');
         titleElement.classList.add('modal-title');
         titleElement.innerText = title;
         titleContainer.appendChild(titleElement);

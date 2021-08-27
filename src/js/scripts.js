@@ -310,7 +310,9 @@ function handleInput(e) {
         if (val >= 1 && val <= 151) {
             result = [array[val - 1]];
         } else {
-            errorDiv.innerText = 'This list only contains Pokemons 1-151';
+            if (val != '') {
+                errorDiv.innerText = 'This list only contains Pokemons 1-151';
+            }
         }
     }
     result.map(el => {

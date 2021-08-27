@@ -3,7 +3,7 @@ const capitalize = (s) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 };
 
-let errorDiv = document.querySelector('#error');
+const errorDiv = document.querySelector('#error');
 
 let pokemonRepository = (() => {
 
@@ -90,6 +90,14 @@ let pokemonRepository = (() => {
         });
         listItem.appendChild(button);
         htmlList.appendChild(listItem);
+    }
+
+    //Remove all Children from list
+    function cleanList() {
+        let htmlList = document.querySelector('.pokemon-list');
+        while (htmlList.firstChild) {
+            htmlList.removeChild(htmlList.firstChild);
+        }
     }
 
     // Modal for Details
@@ -236,7 +244,7 @@ let pokemonRepository = (() => {
                 return console.warn('This list only contains Pokemons 1-151');
             }
         } else {
-            let reIndex = pokemonList.findIndex(e => e.name === pokemon.toLowerCase());
+            let reIndex = pokemonList.findIndex(e => e.name === pokemon);
             if (reIndex !== -1) {
                 let reString = pokemonList[reIndex];
                 myModal.show()
@@ -253,6 +261,7 @@ let pokemonRepository = (() => {
         find: find,
         getAll: getAll,
         addListItem: addListItem,
+        cleanList: cleanList,
         showDetails: showDetails,
         loadList: loadList,
         loadDetails: loadDetails
@@ -261,9 +270,10 @@ let pokemonRepository = (() => {
 })();
 
 
+
 pokemonRepository.loadList().then(() => {
-    pokemonRepository.getAll().map(element => {
-        pokemonRepository.addListItem(element);
+    pokemonRepository.getAll().map(el => {
+        pokemonRepository.addListItem(el);
     });
 });
 
@@ -271,12 +281,39 @@ pokemonRepository.loadList().then(() => {
 let myModal = new bootstrap.Modal(document.querySelector('#mainModal'), {});
 
 //Search Button
+const searchInput = document.querySelector('#site-search');
 function getSearch() {
-    let val = document.querySelector('#site-search').value;
+    let searchVal = searchInput.value.toLowerCase();
     errorDiv.innerText = '';
-    pokemonRepository.find(val);
+    pokemonRepository.find(searchVal);
 }
-document.querySelector('#searchButton').addEventListener('click', e => {
+const searchBtt = document.querySelector('#searchButton');
+searchBtt.addEventListener('click', e => {
     e.preventDefault();
     getSearch();
 });
+
+//Show search on typing
+searchInput.oninput = handleInput;
+function handleInput(e) {
+    pokemonRepository.cleanList();
+    errorDiv.innerText = '';
+    const val = e.target.value.toLowerCase();
+    let array = pokemonRepository.getAll();
+    let result = array;
+    if (isNaN(val) === true) {
+        result = array.filter(el => el.name.indexOf(val) !== -1)
+        if (result.length === 0) {
+            errorDiv.innerText = 'This Pokemon is not in the list, check spelling please.';
+        }
+    } else {
+        if (val >= 1 && val <= 151) {
+            result = [array[val - 1]];
+        } else {
+            errorDiv.innerText = 'This list only contains Pokemons 1-151';
+        }
+    }
+    result.map(el => {
+        pokemonRepository.addListItem(el);
+    });
+}

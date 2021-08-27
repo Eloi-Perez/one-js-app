@@ -13,5 +13,3 @@ Hosted on [GitHub Pages](https://eloi-perez.github.io/pokedex-app/ "GitHub Pages
 * Javascript
 * Bootstrap5
 * Pokemon API https://pokeapi.co/
-
-
